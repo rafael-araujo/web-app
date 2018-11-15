@@ -30,6 +30,7 @@ export default {
         password: this.password
       })
         .then(response => {
+          console.log(response)
           if (response.data.result === 'ok') {
             this.errorMsg = 'logou'
             console.log(this.errorMsg)
