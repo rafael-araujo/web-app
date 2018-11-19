@@ -50,7 +50,6 @@ export default {
         headers: {'Authorization': 'Bearer ' + this.$cookies.get('token')}
       })
         .then(response => {
-          console.log(response)
           if (response.data) {
             this.$router.push({name: 'EmployeeList'})
           }

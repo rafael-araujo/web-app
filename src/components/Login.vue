@@ -1,13 +1,13 @@
 <template>
   <div>
     <img src="../assets/logo.png">
-    <form name="login">
+    <div>
       <label>Usuário</label>
-      <input type="test" v-model="username">
+      <input type="text" v-model="username">
       <label>Senha</label>
       <input type="password" v-model="password">
       <input type="submit" value="Enviar" @click="send">
-    </form>
+    </div>
   </div>
 </template>
 
@@ -25,15 +25,15 @@ export default {
   },
   methods: {
     send () {
-      axios.post('http://127.0.0.1:3000/', {
+      axios.post('http://127.0.0.1:3000/login', {
         username: this.username,
         password: this.password
       })
         .then(response => {
-          console.log(response)
-          if (response.data.result === 'ok') {
-            this.errorMsg = 'logou'
-            console.log(this.errorMsg)
+          this.$cookies.set('token', response.data.token, '5h')
+          if (response.data.token) {
+            console.log(this.$store.state.employeeList)
+            this.$router.push({name: 'EmployeeList'})
           }
         })
     }
